@@ -6,22 +6,25 @@ export const getUsers = createAsyncThunk(
   'users,getUsers',
   async () => {
     let respons = await axios.get(URL_Users)
-    return respons.data;
+    return [...respons.data]
   })
 
 export const deleteUser = createAsyncThunk(
   'users,deleteUsers',
-  async (id, { dispatch }) => {
-    let respons = await axios.delete(URL_Users + '/' + id)
+  async (_id ,{dispatch }) => {
+    let respons = await axios.delete(URL_Users + '/' + _id)
     dispatch(getUsers())
+    return [...respons.data]
+
   }
 )
 export const editOneUser = createAsyncThunk(
   "users/editUsers",
-  async (obj, { dispatch }) => {
-    let respons = await axios.put(URL_Users + '/' + obj.id, obj)
-    console.log(respons.data)
+  async (obj ,{ dispatch }) => {
+    let respons = await axios.put(URL_Users + '/' + obj._id, { name: obj.name, role: obj.role, email: obj.email })
     dispatch(getUsers())
+    return [...respons.data]
+
   }
 )
 
@@ -30,6 +33,8 @@ export const addNewUser = createAsyncThunk(
   async (obj, { dispatch }) => {
     let respons = await axios.post(URL_Users, obj);
     dispatch(getUsers())
+    return [...respons.data]
+
   }
 )
 

@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import {useDispatch,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addNewPosts } from './userPostSlice'
 
 const AddPostForm = ({ _id }) => {
 
-    const [newPost,setNewPost]=useState({title: "" , body: "" ,userId: _id , like: 0 , unlike: 0})
+    const [newPost, setNewPost] = useState({ title: "", body: "", userId: _id, like: 0, unlike: 0 })
     const dispatch = useDispatch();
 
     const addNewPost = (e) => {
-      e.preventDefault();
-      dispatch(addNewPosts(newPost))
+        e.preventDefault();
+        dispatch(addNewPosts(newPost))
     }
 
     return (
@@ -24,7 +24,7 @@ const AddPostForm = ({ _id }) => {
                     onChange={e => setNewPost({ ...newPost, title: e.target.value })}
                 />
                 <label htmlFor="postContent">body:</label>
-                <input
+                <textarea
                     className='form-control'
                     type={Text}
                     onChange={e => setNewPost({ ...newPost, body: e.target.value })}

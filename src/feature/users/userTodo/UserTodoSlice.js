@@ -7,7 +7,7 @@ export const getUsersTodos = createAsyncThunk(
     'todos,getTodos',
     async () => {
         let respons = await axios.get(URL_Todos)
-        return respons.data;
+        return [...respons.data]
     }
 )
 export const addNewTodo = createAsyncThunk(
@@ -15,6 +15,8 @@ export const addNewTodo = createAsyncThunk(
     async (obj, { dispatch }) => {
         let respons = await axios.post(URL_Todos, obj);
         dispatch(getUsersTodos());
+        return [...respons.data]
+
     }
 )
 export const deleteTodo = createAsyncThunk(
@@ -22,6 +24,7 @@ export const deleteTodo = createAsyncThunk(
     async (_id, { dispatch }) => {
         let respons = await axios.delete(URL_Todos + "/" + _id);
         dispatch(getUsersTodos());
+        return [...respons.data]
 
     }
 )
@@ -33,6 +36,8 @@ export const changeStatusTodo = createAsyncThunk(
             Completed: obj.Completed ? false : true
         });
         dispatch(getUsersTodos());
+        return [...respons.data]
+
 
     }
 )

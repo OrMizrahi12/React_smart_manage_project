@@ -7,6 +7,7 @@ import { getUsersTodos, addNewTodo, deleteTodo, changeStatusTodo } from './UserT
 const ShowAndAddTask = ({ _id }) => {
 
     const [newTodo, setNewTodo] = useState({ todo: "", userId: _id, Completed: false });
+    const [Todo, setTodo] = useState({ todo: "", userId: _id, Completed: false });
     const dispatch = useDispatch();
     const todos = useSelector(state => state.userTodosData.todos);
 
@@ -25,63 +26,67 @@ const ShowAndAddTask = ({ _id }) => {
 
     return (
         <div>
+            <h1 className='display-4 bg-danger p-5 rounded shadow border border-dark'>Todos</h1>
+            <br />
             <div
-             style={{ border: 'solid ', borderColor: chaeckStatus == true ? 'green' : 'red' }}
-             >
-            <h1 className='display-4 bg-info'>Todos</h1>
-            <form className='form-control w-50 mx-auto m-5 '>
-                <lable>todo</lable>
-                <input
-                    type={Text}
-                    onChange={e => setNewTodo({ ...newTodo, todo: e.target.value })}
-                    className='form-control '
-                >
-                </input>
-                <button
-                    className='btn btn-success m-3'
-                    onClick={sendNewTask}
-                    disabled={!newTodo.todo}
-                >
-                    Add Task
-                </button>
-
-            </form>
-
-            <h4
-                className='display-6'
+                style={{ border: 'solid ', borderColor: chaeckStatus == true ? 'green' : 'red' }}
             >
-                {displayEmpty === 0 && 'there are no todos...🙄'}
-            </h4>
+                <h1 className='display-4 bg-info'></h1>
+                <form className='form-control w-50 mx-auto m-5 '>
+                    <lable>todo</lable>
+                    <input
+                        type={Text}
+                        onChange={e => setNewTodo({ ...newTodo, todo: e.target.value })}
+                        className='form-control '
+                    >
+                    </input>
+                    <button
+                        className='btn btn-success m-3'
+                        onClick={sendNewTask}
+                        disabled={!newTodo.todo}
+                    >
+                        Add Task
+                    </button>
 
-            {
-                todos.map(item => item.userId === _id &&
-                    <section
+                </form>
 
-                        className='table table-bordered'>
-                        <hr />
-                        <button
-                            className='btn btn-outline float-end'
-                            onClick={() => dispatch(deleteTodo(item._id))}
-                        >
-                            X
-                        </button>
-                        <button
-                            className='btn btn float-end'
-                            onClick={() => dispatch(changeStatusTodo(item))}
-                        >
-                            {item.Completed ? "👍🏻" : "👎🏻"}
-                        </button>
-                        <h5
-                            style={{ color: item.Completed ? 'green' : 'red' }}
-                            className='w-25'
-                        >{item.todo}
-                        </h5>
-                        <hr />
-                    </section>
-                )
-            }
-           
+                <h4
+                    className='display-6'
+                >
+                    {displayEmpty === 0 && 'there are no todos...🙄'}
+                </h4>
+
+                {
+                    todos.map(item => item.userId === _id &&
+                        <section
+                            key={item._id}
+                            className='table table-bordered'>
+                            <hr />
+                            <button
+                                className='btn btn-outline float-end'
+                                onClick={() => dispatch(deleteTodo(item._id))}
+                            >
+                                X
+                            </button>
+                            <button
+                                className='btn btn float-end'
+                                onClick={() => dispatch(changeStatusTodo(item))}
+                                
+                            >
+                                {item.Completed ? "👍🏻" : "👎🏻"}
+                            </button>
+                            <h5
+                                style={{ color: item.Completed ? 'green' : 'red' }}
+                                className='w-25'
+                            >{item.todo}
+                            </h5>
+                            <hr />
+                        </section>
+                    )
+                }
+
             </div>
+            <hr />
             <PostsList _id={_id} />
         </div>
     )

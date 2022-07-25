@@ -15,7 +15,7 @@ export const addNewPosts = createAsyncThunk(
     async (obj, { dispatch }) => {
         let respons = await axios.post(URL_Posts, obj);
         dispatch(getUsersPosts());
-        return respons.data
+        return [...respons.data]
 
     }
 )
@@ -24,15 +24,15 @@ export const deletePosts = createAsyncThunk(
     async (_id, { dispatch }) => {
         let respons = await axios.delete(URL_Posts + "/" + _id);
         dispatch(getUsersPosts());
-
+        return [...respons.data]
     }
 )
 export const editPost = createAsyncThunk(
     "posts,editPost",
     async ({postById,postEdit,idPost}, { dispatch }) => {
-        let respons = await axios.put(URL_Posts + "/" + idPost[0], {...postById,title:postEdit.title,body:postEdit.body});
+        let respons = await axios.put(URL_Posts + "/" + idPost[0], { ...postById , title: postEdit.title,body: postEdit.body });
         dispatch(getUsersPosts());
-        return respons.data;
+        return [...respons.data]
     
     }
 )
@@ -41,7 +41,7 @@ export const likeToPost = createAsyncThunk(
     async (obj, { dispatch }) => {
         let respons = await axios.put(URL_Posts + "/" + obj._id, { ...obj, like: obj.like + 1 });
         dispatch(getUsersPosts());
-
+        return [...respons.data]
     }
 )
 export const unlikeToPost = createAsyncThunk(
@@ -49,7 +49,7 @@ export const unlikeToPost = createAsyncThunk(
     async (obj, { dispatch }) => {
         let respons = await axios.put(URL_Posts + "/" + obj._id, { ...obj, unlike: obj.unlike + 1 });
         dispatch(getUsersPosts());
-
+        return [...respons.data]
     }
 )
 

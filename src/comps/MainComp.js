@@ -5,6 +5,7 @@ import UserMain from '../feature/users/UserMain'
 import EditPost from '../feature/users/userPost/EditPost'
 import AppWorker from '../feature/workers/appWorker'
 import EditSingleWorker from '../feature/workers/editSingleWorker'
+import ExampEditArr from './exampEditArr'
 import Home from './Home'
 
 const MainComp = () => {
@@ -26,6 +27,13 @@ const MainComp = () => {
           users
         </button>
 
+        <button
+          className='btn btn-outline-info'
+          onClick={() => navigate('/arr')}
+        >
+          arr
+        </button>
+
       </header>
       <Routes>
         <Route path='/' element={<Home />} />
@@ -33,6 +41,7 @@ const MainComp = () => {
         <Route path='/users' element={<UserMain />} />
         <Route path='/users/:_id' element={<EditSingleUser />} />
         <Route path='/users/post/:_id' element={<EditPost />} />
+        <Route path='/arr' element={<ExampEditArr />} />
 
 
       </Routes>

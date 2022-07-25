@@ -15,8 +15,9 @@ const AddNewUser = () => {
 
   return (
     <div>
+      <h1 className='display-4 m-5 p-2'>add user</h1>
       <form
-        className='form-control shadow p-3 w-50 mx-auto m-5'>
+        className='form-control shadow p-3 w-75 mx-auto m-5 border border-dark'>
         <label htmlFor="postTitle">name</label>
         <input
           className='form-control'

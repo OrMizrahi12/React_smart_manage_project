@@ -21,6 +21,8 @@ const Register = () => {
     const navigate = useNavigate()
     const [person, setPerson] = useState({ user: "", pwd: "", email: "" });
     const [blockMassage, setBlockMassage] = useState()
+    const [pass2,setPass2] = useState()
+    let pass = useRef()
     const unSub = person.pwd.length < 5 ||
         person.user.length < 2 ||
         !person.email.includes('@' && '.com') ||
@@ -48,7 +50,7 @@ const Register = () => {
 
     const hendleEmail = (e) => {
         setPerson({ ...person, email: e.target.value })
-        if (!e.target.value.includes('@' && 'com')) {
+        if (!e.target.value.includes('@' && 'com' || 'co.il' || 'org')) {
             setCheckEmail(<p style={{ color: 'red' }}>email not vaild</p>)
         }
         else {
@@ -56,12 +58,13 @@ const Register = () => {
         }
     }
 
-    const confirmPwd = () => {
-        if (passs.current.value !== person.pwd) {
-            setConfirmMassage(<p style={{ color: 'red' }}>password not much</p>)
+    const confirmPwd = (e) => {
+        if (passs.current.value ===  person.pwd || e.target.value === pass.current.value) {
+            setConfirmMassage(<p style={{ color: 'green' }}>password much ✅</p>)
+            
         }
         else {
-            setConfirmMassage(<p style={{ color: 'green' }}>password much ✅</p>)
+            setConfirmMassage(<p style={{ color: 'red' }}>password not much</p>)
         }
     }
 
@@ -117,6 +120,7 @@ const Register = () => {
                         <div
                             className="form-floating">
                             <input
+                                ref={pass}
                                 onChange={e => hendlePwd(e)}
                                 type="password"
                                 className="form-control"
@@ -128,8 +132,9 @@ const Register = () => {
                         <div
                             className="form-floating ">
                             <input
+                                disabled={person.pwd.length == 0}
                                 ref={passs}
-                                onChange={confirmPwd}
+                                onChange={e=>confirmPwd(e)}
                                 type="password"
                                 className="form-control"
                                 placeholder="Password"

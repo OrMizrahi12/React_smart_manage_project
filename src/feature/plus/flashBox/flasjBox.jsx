@@ -19,7 +19,7 @@ const FlasjBox = () => {
     const [can,setCan]=useState(true)
 
     const play = () => {
-
+       
         setCan(true)
         temp_ar = []
         number = 0
@@ -30,6 +30,7 @@ const FlasjBox = () => {
 
         }
         for (let i = 0; i < 16; i++) {
+            
             document.querySelector(`#btn${i}`).style.backgroundColor = 'black'
         }
         clearInterval(timer)
@@ -40,15 +41,16 @@ const FlasjBox = () => {
         count++
         setCan(true)
         for (let i = 0; i < arrNum.length; i++) {
-
+           
             document.querySelector(`#btn${arrNum[i]}`).style.backgroundColor = arrColor[count]
             document.querySelector("#id_h1").innerHTML = ''
         }
         if (count == arrColor.length) {
             count = 0   
+            
             clearInterval(timer)
             for (let i = 0; i < 16; i++) {
-
+                
                 document.querySelector(`#btn${i}`).style.backgroundColor = 'black'
             }
         }
@@ -57,7 +59,7 @@ const FlasjBox = () => {
 
 
     const cheakResult = (num) => {
-
+     
         let ar = uniq(arrNum)
 
         if (number === 0) {

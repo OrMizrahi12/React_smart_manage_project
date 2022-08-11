@@ -38,7 +38,7 @@ const FlasjBox = () => {
 
     const runOnColor = () => {
         count++
-        
+        setCan(true)
         for (let i = 0; i < arrNum.length; i++) {
 
             document.querySelector(`#btn${arrNum[i]}`).style.backgroundColor = arrColor[count]
@@ -91,6 +91,7 @@ const FlasjBox = () => {
                     if (i < 2) {
                         play();
                     }
+                    setCan(false)
                 }
                 document.querySelector("#id_h1").innerHTML = 'ⓛⓞⓢⓢ'
                 document.querySelector("#id_h1").style.color = 'red'
@@ -107,7 +108,7 @@ const FlasjBox = () => {
         if (temp_ar.length === ar.length && temp_ar.length > 1) {
             document.querySelector("#id_h1").innerHTML = 'ⓦⓘⓝ'
             document.querySelector("#id_h1").style.color = 'green'
-
+            setCan(true)
             setLevel(level + 1)
             if (speed > 1000) {
                 setSpeed(speed - 250)
